@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { usePokemonFetch } from '@hooks'
 import { PokemonDetail } from '@types'
 import { capitalize } from '@utils'
 import Card from '@components/atoms/Card/Card.tsx'
+import Chip from '@components/atoms/Chip/Chip.tsx'
 
-function PokemonExplorerApp() {
+export default function PokemonList() {
   const { data, isLoading, error, fetchNextPage, hasNextPage } = usePokemonFetch()
 
   useEffect(() => {
@@ -61,7 +63,6 @@ function PokemonExplorerApp() {
   }
 
   const allPokemonDetails = data?.pages.flatMap(page => page.pokemonsDetails) || []
-  console.log('allPokemonDetails length', allPokemonDetails.length)
 
   return (
     <>
@@ -69,15 +70,26 @@ function PokemonExplorerApp() {
       <div className="items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {allPokemonDetails?.map((pokemon: PokemonDetail, index: number) => (
           <div key={index}>
-            <Card>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-              <p className="text-gray-600">{capitalize(pokemon.name)}</p>
-            </Card>
+            <Link to={`/pokemon/${pokemon.id}`}>
+              <Card>
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <p className="text-gray-600">
+                  #{pokemon.id} {capitalize(pokemon.name)}
+                </p>
+                <div className="flex flex-row mt-1">
+                  {pokemon.types.map((type, index) => (
+                    <Chip
+                      customClass={`bg-pokemon-${type.type.name.toLowerCase()}`}
+                      name={type.type.name}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              </Card>
+            </Link>
           </div>
         ))}
       </div>
     </>
   )
 }
-
-export default PokemonExplorerApp

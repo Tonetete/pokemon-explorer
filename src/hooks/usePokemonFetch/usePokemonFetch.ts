@@ -34,8 +34,6 @@ export const usePokemonFetch = (): QueryPokemonData => {
     initialPageParam: 0,
   })
 
-  console.log(data)
-
   return {
     data,
     isLoading,
