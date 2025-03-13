@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { LIMIT_PER_PAGE, POKEMON_API_URL } from '@constants'
 import { PokemonDetail, PokemonListResponse, QueryPokemonData } from '@types'
 

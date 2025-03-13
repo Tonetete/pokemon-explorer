@@ -2,11 +2,10 @@ import { FetchNextPageOptions, InfiniteQueryObserverResult } from '@tanstack/rea
 
 export interface QueryPokemonData {
   data?: {
-    // Make data optional
     pages: {
       pokemonsDetails: PokemonDetail[]
       nextOffset: number | null
-    }[] // Note: pages should be an array
+    }[]
   }
   isLoading: boolean
   error: Error | null
