@@ -16,7 +16,7 @@ export interface QueryPokemonData {
 }
 
 export interface PokemonDetail {
-  num: number
+  id: number
   name: string
   sprites: {
     front_default: string
