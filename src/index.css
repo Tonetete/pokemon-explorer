@@ -1,8 +1,15 @@
 @import "tailwindcss";
 @config '../tailwind.config.cjs';
 
+@font-face {
+  font-family: 'PokemonGBFont';
+  src: url('./assets/fonts/pokemon-gb-font/PokemonGb-RAeo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'PokemonGBFont';
   line-height: 1.5;
   font-weight: 400;
 
@@ -24,6 +31,7 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {
