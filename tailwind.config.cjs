@@ -5,17 +5,14 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    listStyleType: {
+      square: 'square',
+    },
     extend: {
+      fontFamily: {
+        'pokemon-gb': ['PokemonGbFont'],
+      },
       colors: {
-        // Add your custom colors here
-        primary: '#3B82F6',
-        secondary: '#10B981',
-        accent: '#8B5CF6',
-        danger: '#EF4444',
-        warning: '#F59E0B',
-        info: '#3B82F6',
-        success: '#10B981',
-
         pokemon: {
           normal: '#dcdcdc',
           fighting: '#e8847e',
@@ -43,37 +40,71 @@ module.exports = {
     },
   },
   safeList: [
-    'bg-pokemon-normal',
-    'bg-pokemon-fighting',
-    'bg-pokemon-flying',
-    'bg-pokemon-poison',
-    'bg-pokemon-ground',
-    'bg-pokemon-rock',
-    'bg-pokemon-bug',
-    'bg-pokemon-ghost',
-    'bg-pokemon-steel',
-    'bg-pokemon-fire',
-    'bg-pokemon-water',
-    'bg-pokemon-grass',
-    'bg-pokemon-electric',
-    'bg-pokemon-psychic',
-    'bg-pokemon-ice',
-    'bg-pokemon-dragon',
-    'bg-pokemon-dark',
-    'bg-pokemon-fairy',
-    'bg-pokemon-stellar',
-    'bg-pokemon-unknown',
-    'bg-pokemon-shadow',
+    'bg-color-pokemon-normal',
+    'bg-color-pokemon-fighting',
+    'bg-color-pokemon-flying',
+    'bg-color-pokemon-poison',
+    'bg-color-pokemon-ground',
+    'bg-color-pokemon-rock',
+    'bg-color-pokemon-bug',
+    'bg-color-pokemon-ghost',
+    'bg-color-pokemon-steel',
+    'bg-color-pokemon-fire',
+    'bg-color-pokemon-water',
+    'bg-color-pokemon-grass',
+    'bg-color-pokemon-electric',
+    'bg-color-pokemon-psychic',
+    'bg-color-pokemon-ice',
+    'bg-color-pokemon-dragon',
+    'bg-color-pokemon-dark',
+    'bg-color-pokemon-fairy',
+    'bg-color-pokemon-stellar',
+    'bg-color-pokemon-unknown',
+    'bg-color-pokemon-shadow',
+    'text-color-pokemon-normal',
+    'text-color-pokemon-fighting',
+    'text-color-pokemon-flying',
+    'text-color-pokemon-poison',
+    'text-color-pokemon-ground',
+    'text-color-pokemon-rock',
+    'text-color-pokemon-bug',
+    'text-color-pokemon-ghost',
+    'text-color-pokemon-steel',
+    'text-color-pokemon-fire',
+    'text-color-pokemon-water',
+    'text-color-pokemon-grass',
+    'text-color-pokemon-electric',
+    'text-color-pokemon-psychic',
+    'text-color-pokemon-ice',
+    'text-color-pokemon-dragon',
+    'text-color-pokemon-dark',
+    'text-color-pokemon-fairy',
+    'text-color-pokemon-stellar',
+    'text-color-pokemon-unknown',
+    'text-color-pokemon-shadow',
   ],
   plugins: [
     plugin(function ({ addUtilities, theme }) {
       const pokemonColors = theme('colors.pokemon')
       const newUtilities = {}
 
+      const getContrastTextColor = hex => {
+        const r = parseInt(hex.substring(1, 3), 16)
+        const g = parseInt(hex.substring(3, 5), 16)
+        const b = parseInt(hex.substring(5, 7), 16)
+
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000
+
+        return brightness > 200 ? '#4B5563' : '#f9fafb'
+      }
+
       Object.entries(pokemonColors).forEach(([type, color]) => {
-        newUtilities[`.bg-pokemon-${type}`] = {
+        const textColor = getContrastTextColor(color)
+
+        newUtilities[`.bg-color-pokemon-${type}`] = {
           backgroundColor: color,
         }
+        newUtilities[`.text-color-pokemon-${type}`] = { color: textColor }
       })
 
       addUtilities(newUtilities)
