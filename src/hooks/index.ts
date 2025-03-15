@@ -1,3 +1,3 @@
-import { usePokemonFetchList } from './usePokemonFetch/usePokemonFetchList.ts'
+import { usePokemonFetch } from './usePokemonFetch/usePokemonFetch.ts'
 
-export { usePokemonFetchList }
+export { usePokemonFetch }
