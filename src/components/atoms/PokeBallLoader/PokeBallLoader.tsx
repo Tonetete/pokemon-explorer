@@ -11,7 +11,10 @@ export default function PokeballLoader({ splash = true }: { splash?: boolean }) 
   }, [])
 
   return (
-    <div className={`flex items-center justify-center ${splash ? 'h-screen' : 'mt-6 mb-6'}`}>
+    <div
+      data-testid="pokeball-loader"
+      className={`flex items-center justify-center ${splash ? 'h-screen' : 'mt-6 mb-6'}`}
+    >
       <div className="relative w-24 h-24 animate-spin-slow">
         <div className="w-24 h-24 rounded-full border-4 border-black overflow-hidden shadow-lg relative flex items-center justify-center">
           <div

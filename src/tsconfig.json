@@ -18,6 +18,8 @@
       "@constants/*": ["./constants/*"],
       "@hooks": ["hooks"],
       "@hooks/*": ["hooks/*"],
+      "@test": ["test"],
+      "@test/*": ["test/*"],
       "@types": ["types"],
       "@types/*": ["types/*"],
       "@utils": ["utils"],
