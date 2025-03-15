@@ -1,7 +1,6 @@
-import React from 'react'
 import { combine } from 'zustand/middleware'
 import { create } from 'zustand/react'
-import { PokemonDetail } from '@types'
+import { PokemonDetail } from '@components/pages/PokemonDetailPage/PokemonDetailPage.tsx'
 
 export interface State {
   pokemonList: PokemonDetail[]
