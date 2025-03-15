@@ -25,13 +25,18 @@ export default function PokemonFavoriteListPage() {
           ))}
         </div>
       ) : (
-        <span className="flex items-center justify-center text-amber-50 font-pokemon-gb">
-          No favorites yet. Got to the
-          <Link className="ml-2 mr-2 text-blue-500" to="/pokemon-explorer">
-            Pokemon Explorer
-          </Link>{' '}
-          to start adding them.
-        </span>
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="flex items-center justify-center font-pokemon-gb text-lg">
+            No favorites yet!
+          </h2>
+          <span className="flex items-center justify-center font-pokemon-gb text-sm mt-2">
+            Go to the
+            <Link className="ml-2 mr-2 text-blue-500" to="/pokemon-explorer">
+              Pokemon Explorer
+            </Link>{' '}
+            to start adding them.
+          </span>
+        </div>
       )}
     </>
   )

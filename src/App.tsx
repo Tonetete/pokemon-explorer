@@ -34,7 +34,7 @@ export default function App() {
         <header className="fixed top-0 left-0 right-0 z-50 text-sm text-gray-600 mb-4 p-4 bg-white shadow-md flex items-center justify-between">
           <Breadcrumb routes={routes} />
           <Link to="/pokemon-explorer/favorites-pokemon">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-2 py-2 rounded-lg cursor-pointer">
+            <button className="cursor-pointer px-4 py-2 bg-blue-500 text-white font-bold rounded-full shadow-md hover:bg-blue-600 transition">
               Go to favorites
             </button>
           </Link>
