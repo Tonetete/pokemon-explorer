@@ -1,14 +1,14 @@
-import { useLocation } from 'react-router'
+import { useParams, useLocation } from 'react-router'
 import { KeyValue } from '@types'
 import { capitalize, replaceHyphenWithSpace } from '@utils'
 import Card from '@components/atoms/Card/Card.tsx'
 import Chip from '@components/atoms/Chip/Chip.tsx'
+import ScrollToTop from '@components/atoms/ScrollToTop/ScrollToTop.tsx'
+import PokeballLoader from '@components/atoms/PokeBallLoader/PokeBallLoader.tsx'
 import { usePokemomnFetchDetail } from '@hooks/usePokemonFetch/usePokemonFetch.ts'
 import AudioPlayer from '@components/molecules/AudioPlayer/AudioPlayer.tsx'
 import FavoriteStar from '@components/organisms/Favorite/Favorite.tsx'
 import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore.ts'
-import { useParams } from 'react-router'
-import ScrollToTop from '@components/atoms/ScrollToTop/ScrollToTop.tsx'
 
 export interface PokemonDetail {
   id: number
@@ -62,26 +62,14 @@ export default function PokemonDetailPage() {
     const { data, isLoading, error } = usePokemomnFetchDetail(Number(id))
 
     if (isLoading) {
-      return (
-        <Card>
-          <p className="text-gray-600 font-pokemon-gb">Loading...</p>
-        </Card>
-      )
+      return <PokeballLoader />
     }
     if (error) {
-      return (
-        <Card>
-          <p className="text-gray-600 font-pokemon-gb">Error: {error.message}</p>
-        </Card>
-      )
+      return <p className="text-gray-600 font-pokemon-gb">Error: {error.message}</p>
     }
 
     if (!data) {
-      return (
-        <Card>
-          <p className="text-gray-600 font-pokemon-gb">Pokemon not found</p>
-        </Card>
-      )
+      ;<p className="text-gray-600 font-pokemon-gb">Error: Pokemon not found</p>
     }
   }
 

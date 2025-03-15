@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigationType } from 'react-router'
 import { usePokemonFetch } from '@hooks'
 import { capitalize } from '@utils'

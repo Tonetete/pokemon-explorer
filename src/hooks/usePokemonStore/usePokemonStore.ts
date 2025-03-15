@@ -14,7 +14,9 @@ export const usePokemonStore = create(
   combine(
     {
       pokemonList: [],
-      favoritesPokemonList: [],
+      favoritesPokemonList: localStorage.getItem('favoritesPokemonList')
+        ? JSON.parse(localStorage.getItem('favoritesPokemonList')!)
+        : [],
       loadingRoute: false,
       loadingData: false,
       scrollYPosition: 0,
@@ -64,14 +66,17 @@ export const usePokemonStore = create(
             | PokemonDetail[]
             | ((pokemonList: PokemonDetail[]) => PokemonDetail[])
         ) =>
-          set(
-            (state: State): Pick<State, 'favoritesPokemonList'> => ({
-              favoritesPokemonList:
-                typeof nextFavoritesPokemonList === 'function'
-                  ? nextFavoritesPokemonList(state.favoritesPokemonList)
-                  : nextFavoritesPokemonList,
-            })
-          ),
+          set((state: State): Pick<State, 'favoritesPokemonList'> => {
+            const updatedFavorites =
+              typeof nextFavoritesPokemonList === 'function'
+                ? nextFavoritesPokemonList(state.favoritesPokemonList)
+                : nextFavoritesPokemonList
+
+            localStorage.setItem('favoritesPokemonList', JSON.stringify(updatedFavorites))
+            return {
+              favoritesPokemonList: updatedFavorites,
+            }
+          }),
       }
     }
   )
