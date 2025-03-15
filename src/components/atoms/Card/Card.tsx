@@ -1,10 +1,11 @@
 export interface CardParams {
   children: React.ReactNode
+  dimensions?: string
 }
 
-export default function Card({ children }: CardParams) {
+export default function Card({ children, dimensions = 'w-48 h-52' }: CardParams) {
   return (
-    <div className="flex flex-col justify-center items-center h-48 w-48 max-w-md mx-auto bg-white rounded-xl shadow-md p-6">
+    <div className={`${dimensions} max-w-md mx-auto bg-white rounded-xl shadow-md p-6 w-full`}>
       {children}
     </div>
   )
