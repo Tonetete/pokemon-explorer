@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigationType } from 'react-router'
+import { useNavigationType } from 'react-router'
 import { usePokemonFetch } from '@hooks'
-import { capitalize } from '@utils'
-import Card from '@components/atoms/Card/Card.tsx'
-import Chip from '@components/atoms/Chip/Chip.tsx'
 import PokeballLoader from '@components/atoms/PokeBallLoader/PokeBallLoader.tsx'
 import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore.ts'
 import { MINIMUM_TIME_TO_SHOW_LOADER, SCROLL_BUFFER } from '@constants'
-import FavoriteStar from '@components/organisms/Favorite/Favorite.tsx'
 import { PokemonDetail } from '@components/pages/PokemonDetailPage/PokemonDetailPage.tsx'
 import { useScrollToY } from '@hooks/useScrollToY/useScrollToY.ts'
+import PokemonFavoriteDetail from '@components/organisms/PokemonFavoriteDetail/PokemonFavoriteDetail.tsx'
 
 export default function PokemonListPage() {
   const navigationType = useNavigationType()
@@ -113,36 +110,11 @@ export default function PokemonListPage() {
       <div className="items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {allPokemonDetails?.map((pokemon: PokemonDetail, index: number) => (
           <div key={index}>
-            <FavoriteStar
-              data={pokemon.id}
+            <PokemonFavoriteDetail
               isFavorite={!!favoritesPokemonList.find(p => p.id === pokemon.id)}
               onToggle={handleFavorite}
-            >
-              {({ favoriteButton }) => {
-                return (
-                  <Card>
-                    <div className="flex justify-end">{favoriteButton}</div>
-                    <Link to={`/pokemon-explorer/pokemon-detail/${pokemon.id}`} state={{ pokemon }}>
-                      <div className="flex flex-col items-center">
-                        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-                        <p className="text-gray-600 font-pokemon-gb text-[11px]">
-                          #{pokemon.id} {capitalize(pokemon.name)}
-                        </p>
-                        <div className="flex flex-row mt-1">
-                          {pokemon.types.map((type: PokemonDetail['types'][0], index: number) => (
-                            <Chip
-                              customClass={`bg-color-pokemon-${type.type.name.toLowerCase()} text-color-pokemon-${type.type.name.toLowerCase()}`}
-                              name={type.type.name}
-                              key={index}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </Link>
-                  </Card>
-                )
-              }}
-            </FavoriteStar>
+              pokemon={pokemon}
+            />
           </div>
         ))}
       </div>
