@@ -3,6 +3,7 @@ import PokemonDetailPage from '@components/pages/PokemonDetailPage/PokemonDetail
 import NotFound from '@components/pages/NotFound/NotFound'
 
 import { Navigate, RouteObject } from 'react-router'
+import PokemonFavoriteListPage from '@components/pages/PokemonFavoriteListPage/PokemonFavoriteListPage.tsx'
 
 export const routes: RouteObject[] = [
   {
@@ -13,6 +14,11 @@ export const routes: RouteObject[] = [
     path: '/pokemon-explorer',
     element: <PokemonListPage />,
     handle: { crumb: () => 'Pokémon List' },
+  },
+  {
+    path: '/pokemon-explorer/favorites-pokemon',
+    element: <PokemonFavoriteListPage />,
+    handle: { crumb: () => 'Favorites Pokémon' },
   },
   {
     path: '/pokemon-explorer/pokemon-detail/:id',

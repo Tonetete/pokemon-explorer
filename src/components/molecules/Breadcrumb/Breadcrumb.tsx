@@ -26,7 +26,7 @@ export default function Breadcrumbs({ routes }: BreadCrumbsProps): React.ReactNo
   }, [pathname])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 text-sm text-gray-600 mb-4 p-4 bg-white shadow-md">
+    <nav>
       <ol className="flex space-x-2">
         {crumbs?.map(({ pathname, crumb }, index: number) => {
           return index !== crumbs.length - 1 ? (
