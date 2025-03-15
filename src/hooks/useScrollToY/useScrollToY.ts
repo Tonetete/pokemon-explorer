@@ -7,7 +7,7 @@ import { useCallback } from 'react'
  * @returns {Function} - Function to trigger the scroll effect.
  */
 export function useScrollToY(defaultY: number = 0, smooth: boolean = true) {
-  const scrollToY = useCallback(
+  return useCallback(
     (y: number = defaultY) => {
       if (typeof window === 'undefined') return
 
@@ -20,6 +20,4 @@ export function useScrollToY(defaultY: number = 0, smooth: boolean = true) {
     },
     [defaultY, smooth]
   )
-
-  return scrollToY
 }
