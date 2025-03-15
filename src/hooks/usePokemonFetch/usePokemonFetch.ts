@@ -1,6 +1,35 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import {
+  FetchNextPageOptions,
+  InfiniteQueryObserverResult,
+  useInfiniteQuery,
+  useQuery,
+} from '@tanstack/react-query'
 import { LIMIT_PER_PAGE, POKEMON_API_URL } from '@constants'
-import { PokemonDetail, PokemonListResponse, QueryPokemonData } from '@types'
+import { PokemonListResponse } from '@types'
+import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore.ts'
+import { PokemonDetail } from '@components/pages/PokemonDetailPage/PokemonDetailPage.tsx'
+
+export interface QueryPokemonDataList {
+  data?: {
+    pages: {
+      pokemonsDetails: PokemonDetail[]
+      nextOffset: number | null
+    }[]
+  }
+  isLoading: boolean
+  error: Error | null
+  fetchNextPage: (
+    options?: FetchNextPageOptions
+  ) => Promise<InfiniteQueryObserverResult<any, Error>>
+  hasNextPage: boolean
+}
+
+export interface QueryPokemonDataDetail {
+  data?: PokemonDetail
+  isLoading: boolean
+  error: Error | null
+}
 
 const fetchPokemonList = async (
   offset: number
@@ -26,13 +55,41 @@ const fetchPokemonList = async (
   }
 }
 
-export const usePokemonFetch = (): QueryPokemonData => {
+const fetchPokemonDetail = async (id: number): Promise<PokemonDetail> => {
+  const response = await fetch(`${POKEMON_API_URL}pokemon/${id}`)
+  return response.json()
+}
+
+export const usePokemomnFetchDetail = (id: number): QueryPokemonDataDetail => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['pokemon', id],
+    queryFn: () => fetchPokemonDetail(id),
+  })
+
+  return {
+    data,
+    isLoading,
+    error,
+  }
+}
+
+export const usePokemonFetch = (): QueryPokemonDataList => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['pokemons'],
     queryFn: async ({ pageParam = 0 }) => fetchPokemonList(pageParam),
     getNextPageParam: lastPage => lastPage.nextOffset,
     initialPageParam: 0,
   })
+
+  const { setPokemonList } = usePokemonStore()
+
+  useEffect(() => {
+    if (data) {
+      setPokemonList(
+        data.pages.flatMap((page: { pokemonsDetails: PokemonDetail[] }) => page.pokemonsDetails)
+      )
+    }
+  }, [data, setPokemonList])
 
   return {
     data,
