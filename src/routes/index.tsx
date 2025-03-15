@@ -1,30 +1,27 @@
-import { Suspense } from 'react'
-import { RouteObject } from 'react-router-dom'
-import PokemonList from '@components/pages/PokemonList/PokemonList.tsx'
-import PokemonDetail from '@components/pages/PokemonDetail/PokemonDetai.tsx'
+import PokemonListPage from '@components/pages/PokemonListPage/PokemonListPage.tsx'
+import PokemonDetailPage from '@components/pages/PokemonDetailPage/PokemonDetailPage.tsx'
 import NotFound from '@components/pages/NotFound/NotFound'
 
-const Loading = () => <div className="text-center py-10">Loading...</div>
+import { Navigate, RouteObject } from 'react-router'
 
-const withSuspense = (Component: React.ComponentType) => (
-  <Suspense fallback={<Loading />}>
-    <Component />
-  </Suspense>
-)
-
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <PokemonList />,
+    element: <Navigate to="/pokemon-explorer" />,
   },
   {
-    path: '/pokemon/:id',
-    element: withSuspense(PokemonDetail),
+    path: '/pokemon-explorer',
+    element: <PokemonListPage />,
+    handle: { crumb: () => 'Pokémon List' },
+  },
+  {
+    path: '/pokemon-explorer/pokemon-detail/:id',
+    element: <PokemonDetailPage />,
+    handle: { crumb: () => 'Pokémon Detail' },
   },
   {
     path: '*',
     element: <NotFound />,
+    handle: { crumb: () => 'Not Found' },
   },
 ]
-
-export default routes
