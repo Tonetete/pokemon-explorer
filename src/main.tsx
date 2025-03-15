@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './index.css'
 import PokeballLoader from '@components/atoms/PokeBallLoader/PokeBallLoader.tsx'
-import ScrollToTop from '@components/atoms/ScrollToTop/ScrollToTop.tsx'
 import { MINIMUM_TIME_TO_SHOW_LOADER } from '@constants'
 import Breadcrumb from '@components/molecules/Breadcrumb/Breadcrumb.tsx'
 import { routes } from './routes'
@@ -43,7 +42,6 @@ createRoot(rootElement).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Breadcrumb routes={routes} />
-        <ScrollToTop />
         <div className="mt-16">
           <DelayedSuspense>
             <Routes>

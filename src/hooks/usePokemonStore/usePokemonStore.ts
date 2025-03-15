@@ -7,6 +7,7 @@ export interface State {
   favoritesPokemonList: PokemonDetail[]
   loadingRoute: boolean
   loadingData: boolean
+  scrollYPosition: number
 }
 
 export const usePokemonStore = create(
@@ -16,9 +17,19 @@ export const usePokemonStore = create(
       favoritesPokemonList: [],
       loadingRoute: false,
       loadingData: false,
+      scrollYPosition: 0,
     } as State,
     set => {
       return {
+        setScrollYPosition: (nextScrollYPosition: number | ((scrollYPosition: number) => number)) =>
+          set(
+            (state: State): Pick<State, 'scrollYPosition'> => ({
+              scrollYPosition:
+                typeof nextScrollYPosition === 'function'
+                  ? nextScrollYPosition(state.scrollYPosition)
+                  : nextScrollYPosition,
+            })
+          ),
         setLoadingRoute: (nextLoadingRoute: boolean | ((loading: boolean) => boolean)) =>
           set(
             (state: State): Pick<State, 'loadingRoute'> => ({
