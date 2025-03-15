@@ -24,10 +24,10 @@ const renderComponent = () => {
 }
 
 describe('PokemonListPage Integration Test', () => {
-  let spyStoreSetPokemonList: any
-  let spyStoreSetLoadingData: any
-  let spyStoreSetFavoritesPokemonList: any
-  let spyStoreSetScrollYPosition: any
+  // let spyStoreSetPokemonList: any
+  // let spyStoreSetLoadingData: any
+  // let spyStoreSetFavoritesPokemonList: any
+  // let spyStoreSetScrollYPosition: any
 
   let store: any
 
@@ -35,10 +35,10 @@ describe('PokemonListPage Integration Test', () => {
     vi.resetAllMocks()
 
     store = usePokemonStore
-    spyStoreSetPokemonList = vi.spyOn(store.getState(), 'setPokemonList')
-    spyStoreSetLoadingData = vi.spyOn(store.getState(), 'setLoadingData')
-    spyStoreSetFavoritesPokemonList = vi.spyOn(store.getState(), 'setFavoritesPokemonList')
-    spyStoreSetScrollYPosition = vi.spyOn(store.getState(), 'setScrollYPosition')
+    // spyStoreSetPokemonList = vi.spyOn(store.getState(), 'setPokemonList')
+    // spyStoreSetLoadingData = vi.spyOn(store.getState(), 'setLoadingData')
+    // spyStoreSetFavoritesPokemonList = vi.spyOn(store.getState(), 'setFavoritesPokemonList')
+    // spyStoreSetScrollYPosition = vi.spyOn(store.getState(), 'setScrollYPosition')
 
     usePokemonFetch.mockReturnValue({
       isLoading: false,
@@ -55,7 +55,7 @@ describe('PokemonListPage Integration Test', () => {
       store.getState().setPokemonList(pokemonDetailsMock)
     })
 
-    const component = renderComponent()
+    renderComponent()
 
     await waitFor(() => {
       expect(screen.getByText(/#1 Bulbasaur/i)).toBeInTheDocument()
@@ -85,7 +85,7 @@ describe('PokemonListPage Integration Test', () => {
       store.getState().setLoadingData(true)
     })
 
-    const component = renderComponent()
+    renderComponent()
 
     expect(screen.queryByTestId('pokeball-loader')).not.toBeInTheDocument()
   })
@@ -104,7 +104,7 @@ describe('PokemonListPage Integration Test', () => {
       store.getState().setPokemonList(pokemonDetailsMock)
     })
 
-    const component = renderComponent()
+    renderComponent()
 
     const favoriteButton = screen.getAllByTestId('favorite-button')[0]
 
@@ -130,7 +130,7 @@ describe('PokemonListPage Integration Test', () => {
 
     expect(store.getState().favoritesPokemonList.length).toBe(4)
 
-    const component = renderComponent()
+    renderComponent()
 
     const favoriteButton = screen.getAllByTestId('favorite-button')[0]
 
@@ -149,7 +149,7 @@ describe('PokemonListPage Integration Test', () => {
       isFetchingNextPage: false,
     })
 
-    const component = renderComponent()
+    renderComponent()
 
     expect(screen.getByText(/no data returned/i)).toBeInTheDocument()
   })
@@ -164,7 +164,7 @@ describe('PokemonListPage Integration Test', () => {
       isFetchingNextPage: false,
     })
 
-    const component = renderComponent()
+    renderComponent()
 
     expect(screen.getByText(/failed to fetch/i)).toBeInTheDocument()
   })
