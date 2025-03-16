@@ -29,6 +29,38 @@ export const pokemonDetailsMock: PokemonDetail[] = [
           url: 'https://pokeapi.co/api/v2/stat/2/',
         },
       },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-attack',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'speed',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
     ],
     moves: [
       {
@@ -99,6 +131,38 @@ export const pokemonDetailsMock: PokemonDetail[] = [
           url: 'https://pokeapi.co/api/v2/stat/2/',
         },
       },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-attack',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'speed',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
     ],
     moves: [
       {
@@ -153,6 +217,38 @@ export const pokemonDetailsMock: PokemonDetail[] = [
           url: 'https://pokeapi.co/api/v2/stat/2/',
         },
       },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-attack',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'speed',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
     ],
     moves: [
       {
@@ -197,6 +293,38 @@ export const pokemonDetailsMock: PokemonDetail[] = [
         effort: 0,
         stat: {
           name: 'attack',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-attack',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'special-defense',
+          url: 'https://pokeapi.co/api/v2/stat/2/',
+        },
+      },
+      {
+        base_stat: 52,
+        effort: 0,
+        stat: {
+          name: 'speed',
           url: 'https://pokeapi.co/api/v2/stat/2/',
         },
       },

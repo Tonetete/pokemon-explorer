@@ -29,6 +29,7 @@ export interface QueryPokemonDataDetail {
   data?: PokemonDetail
   isLoading: boolean
   error: Error | null
+  isSuccess: boolean
 }
 
 const fetchPokemonList = async (
@@ -55,21 +56,23 @@ const fetchPokemonList = async (
   }
 }
 
-const fetchPokemonDetail = async (id: number): Promise<PokemonDetail> => {
+const fetchPokemonDetail = async (id: number | null): Promise<PokemonDetail> => {
   const response = await fetch(`${POKEMON_API_URL}pokemon/${id}`)
   return response.json()
 }
 
-export const usePokemomnFetchDetail = (id: number): QueryPokemonDataDetail => {
-  const { data, isLoading, error } = useQuery({
+export const usePokemonFetchDetail = (id: number | null): QueryPokemonDataDetail => {
+  const { data, isLoading, error, isSuccess } = useQuery({
     queryKey: ['pokemon', id],
     queryFn: () => fetchPokemonDetail(id),
+    enabled: !!id,
   })
 
   return {
     data,
     isLoading,
     error,
+    isSuccess,
   }
 }
 

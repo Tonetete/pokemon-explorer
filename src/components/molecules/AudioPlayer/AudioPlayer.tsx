@@ -2,9 +2,10 @@ import { useRef } from 'react'
 
 interface AudioPlayerParams {
   src: string
+  text: string
 }
 
-export default function AudioPlayer({ src }: AudioPlayerParams) {
+export default function AudioPlayer({ src, text }: AudioPlayerParams) {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const handlePlay = () => {
@@ -23,7 +24,7 @@ export default function AudioPlayer({ src }: AudioPlayerParams) {
         onClick={handlePlay}
         className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-2 py-2 rounded-lg cursor-pointer"
       >
-        {'\u25B6'} Play cry
+        {'\u25B6'} {text}
       </button>
     </div>
   )

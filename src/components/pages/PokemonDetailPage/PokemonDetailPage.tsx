@@ -5,10 +5,11 @@ import Card from '@components/atoms/Card/Card.tsx'
 import Chip from '@components/atoms/Chip/Chip.tsx'
 import ScrollToTop from '@components/atoms/ScrollToTop/ScrollToTop.tsx'
 import PokeballLoader from '@components/atoms/PokeBallLoader/PokeBallLoader.tsx'
-import { usePokemomnFetchDetail } from '@hooks/usePokemonFetch/usePokemonFetch.ts'
+import { usePokemonFetchDetail } from '@hooks/usePokemonFetch/usePokemonFetch.ts'
 import AudioPlayer from '@components/molecules/AudioPlayer/AudioPlayer.tsx'
 import FavoriteStar from '@components/organisms/Favorite/Favorite.tsx'
 import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore.ts'
+import { useEffect, useState } from 'react'
 
 export interface PokemonDetail {
   id: number
@@ -57,20 +58,24 @@ export default function PokemonDetailPage() {
   const location = useLocation()
   const { favoritesPokemonList, setFavoritesPokemonList } = usePokemonStore()
   const pokemon = location.state?.pokemon
+  const { data, isLoading, error } = usePokemonFetchDetail(pokemon ? null : Number(id))
+  const [pokemonDetail, setPokemonDetail] = useState(pokemon || data)
 
-  if (!pokemon) {
-    const { data, isLoading, error } = usePokemomnFetchDetail(Number(id))
+  useEffect(() => {
+    if (data) {
+      setPokemonDetail(data)
+    }
+  }, [data])
 
-    if (isLoading) {
-      return <PokeballLoader />
-    }
-    if (error) {
-      return <p className="text-gray-600 font-pokemon-gb">Error: {error.message}</p>
-    }
+  if (isLoading) {
+    return <PokeballLoader />
+  }
+  if (error) {
+    return <p className="pokemon-text-gray">There was an unexpected error</p>
+  }
 
-    if (!data) {
-      ;<p className="text-gray-600 font-pokemon-gb">Error: Pokemon not found</p>
-    }
+  if (!pokemonDetail) {
+    return <p className="pokemon-text-gray">Pokémon not found</p>
   }
 
   const handleFavorite = ({ isFavorite, data }: { isFavorite: boolean; data: unknown }) => {
@@ -81,14 +86,14 @@ export default function PokemonDetailPage() {
     }
   }
 
-  const { name: typeName } = pokemon.types[0].type
+  const { name: typeName } = pokemonDetail.types[0].type
 
   return (
     <div>
       <ScrollToTop />
       <FavoriteStar
-        data={pokemon.id}
-        isFavorite={!!favoritesPokemonList.find(p => p.id === pokemon.id)}
+        data={pokemonDetail.id}
+        isFavorite={!!favoritesPokemonList.find(p => p.id === pokemonDetail.id)}
         onToggle={handleFavorite}
       >
         {({ favoriteButton }) => (
@@ -96,19 +101,22 @@ export default function PokemonDetailPage() {
             <Card dimensions="md:w-80 sm:w-80">
               <div className="flex justify-end">{favoriteButton}</div>
               <section className="flex flex-col items-center">
-                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <img src={pokemonDetail.sprites.front_default} alt={pokemonDetail.name} />
                 <div>
                   <p className="text-gray-600 mt-2 col-span-1 font-pokemon-gb">
-                    #{pokemon.id} {capitalize(pokemon.name)}
+                    #{pokemonDetail.id} {capitalize(pokemonDetail.name)}
                   </p>
                 </div>
                 <div className="mt-2">
-                  <AudioPlayer src={pokemon.cries.legacy || pokemon.cries.latest} />
+                  <AudioPlayer
+                    text="Cries"
+                    src={pokemonDetail.cries.legacy || pokemonDetail.cries.latest}
+                  />
                 </div>
               </section>
               <section className="flex flex-row mt-4 w-full">
                 <span className="text-gray-600 mr-2">Types: </span>
-                {pokemon.types.map((type: PokemonDetail['types'][0], index: number) => (
+                {pokemonDetail.types.map((type: PokemonDetail['types'][0], index: number) => (
                   <Chip
                     customClass={`bg-color-pokemon-${type.type.name.toLowerCase()} text-color-pokemon-${type.type.name}`}
                     name={type.type.name}
@@ -121,9 +129,9 @@ export default function PokemonDetailPage() {
                   <p className="text-gray-600">Stats</p>
                 </header>
                 <div
-                  className={`flex flex-col mt-2 text-gray-600 justify-start w-full bg-color-pokemon-${typeName} rounded-md border-2 border-stone-600 p-4`}
+                  className={`flex flex-col mt-2 justify-start w-full bg-color-pokemon-${typeName} rounded-md border-2 border-stone-600 p-4`}
                 >
-                  {pokemon?.stats.map((stat: PokemonDetail['stats'][0], index: number) => (
+                  {pokemonDetail?.stats.map((stat: PokemonDetail['stats'][0], index: number) => (
                     <div
                       className={`grid grid-cols-3 font-pokemon-gb text-color-pokemon-${typeName} text-xs`}
                       key={index}
@@ -142,7 +150,7 @@ export default function PokemonDetailPage() {
                   className={`flex flex-col mt-2 justify-start w-full text-xs font-pokemon-gb text-color-pokemon-${typeName} bg-color-pokemon-${typeName} rounded-md border-2 border-stone-600 pl-6 pt-2 pb-2`}
                 >
                   <ul className="list-square">
-                    {pokemon?.moves.map((move: PokemonDetail['moves'][0], index: number) => (
+                    {pokemonDetail?.moves.map((move: PokemonDetail['moves'][0], index: number) => (
                       <li key={index} className="col-li-2 mt-1">
                         {capitalize(replaceHyphenWithSpace(move.move.name))}
                       </li>
