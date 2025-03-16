@@ -5,6 +5,7 @@ import path from 'path'
 import { POKEMON_API_URL } from './src/constants'
 
 export default defineConfig({
+  base: '/pokemon-explorer/',
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
