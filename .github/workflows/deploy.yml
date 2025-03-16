@@ -6,10 +6,7 @@ on:
       - master
   pull_request:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+permissions: write-all
 
 jobs:
   test:
