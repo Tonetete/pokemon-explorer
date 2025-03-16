@@ -59,9 +59,8 @@ jobs:
       - name: Build Project (Vite)
         run: npm run build
 
-      - name:
-        Debug: List Build Files
-        run: ls -R dist  # Check if the build files exist
+      - name: List Build Files
+        run: ls -R dist
 
       - name: Upload Build Artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v2
