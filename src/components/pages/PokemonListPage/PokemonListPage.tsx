@@ -91,7 +91,7 @@ export default function PokemonListPage() {
     return <div>Error: {error.message}</div>
   }
 
-  if (!data) {
+  if (!data && !isLoading) {
     return <div>No data returned</div>
   }
 
