@@ -21,8 +21,12 @@ export default function PokemonFavoriteDetail({
       {({ favoriteButton }: { favoriteButton: React.ReactNode }) => {
         return (
           <Card>
-            <div className="flex justify-end">{favoriteButton}</div>
-            <Link to={`/pokemon-explorer/pokemon-detail/${pokemon.id}`} state={{ pokemon }}>
+            <div className="pokemon-card flex justify-end">{favoriteButton}</div>
+            <Link
+              className="pokemon-detail-link"
+              to={`/pokemon-explorer/pokemon-detail/${pokemon.id}`}
+              state={{ pokemon }}
+            >
               <div className="flex flex-col items-center">
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 <p className="text-gray-600 font-pokemon-gb text-[11px]">

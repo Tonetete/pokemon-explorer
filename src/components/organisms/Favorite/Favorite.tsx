@@ -15,7 +15,7 @@ export default function FavoriteStar({ data, isFavorite, onToggle, children }: F
         favoriteButton: (
           <button
             data-testid="favorite-button"
-            className="cursor-pointer"
+            className="cursor-pointer favorite-button"
             onClick={() => onToggle({ data, isFavorite })}
           >
             {isFavorite ? (
