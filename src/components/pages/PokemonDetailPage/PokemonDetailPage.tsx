@@ -70,12 +70,13 @@ export default function PokemonDetailPage() {
   if (isLoading) {
     return <PokeballLoader />
   }
-  if (error) {
-    return <p className="pokemon-text-gray">There was an unexpected error</p>
-  }
 
   if (!pokemonDetail) {
     return <p className="pokemon-text-gray">Pokémon not found</p>
+  }
+
+  if (error) {
+    return <p className="pokemon-text-gray">There was an unexpected error</p>
   }
 
   const handleFavorite = ({ isFavorite, data }: { isFavorite: boolean; data: unknown }) => {
