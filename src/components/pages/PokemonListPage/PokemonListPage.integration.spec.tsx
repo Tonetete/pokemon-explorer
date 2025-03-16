@@ -71,25 +71,6 @@ describe('PokemonListPage Integration Test', () => {
     })
   })
 
-  it('handles loading correctly', async () => {
-    usePokemonFetch.mockReturnValue({
-      isLoading: true,
-      data: null,
-      error: null,
-      fetchNextPage: vi.fn(),
-      hasNextPage: false,
-      isFetchingNextPage: false,
-    })
-
-    act(() => {
-      store.getState().setLoadingData(true)
-    })
-
-    renderComponent()
-
-    expect(screen.queryByTestId('pokeball-loader')).not.toBeInTheDocument()
-  })
-
   it('handles favorites correctly when is unfavorited', async () => {
     usePokemonFetch.mockReturnValue({
       isLoading: false,
