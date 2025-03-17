@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { BrowserRouter, useLocation, useParams } from 'react-router'
+import { HashRouter, useLocation, useParams } from 'react-router'
 import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { pokemonDetailsMock } from '../../../test/__mocks__/pokemon-details.mock'
@@ -26,9 +26,9 @@ const renderComponent = () => {
   const queryClient = new QueryClient()
   return render(
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HashRouter>
         <PokemonDetailPage />
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   )
 }

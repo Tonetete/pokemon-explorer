@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router'
+import { HashRouter, Link, Route, Routes } from 'react-router'
 import Breadcrumb from '@components/molecules/Breadcrumb/Breadcrumb.tsx'
 import { routes } from './routes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -30,7 +30,7 @@ export default function App() {
   }
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HashRouter>
         <header className="fixed top-0 left-0 right-0 z-50 text-sm text-gray-600 mb-4 p-4 bg-white shadow-md flex items-center justify-between">
           <Breadcrumb routes={routes} />
           <Link to="/pokemon-explorer/favorites-pokemon">
@@ -48,7 +48,7 @@ export default function App() {
             </Routes>
           </DelayedSuspense>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   )
 }

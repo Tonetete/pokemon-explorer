@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { BrowserRouter } from 'react-router'
+import { HashRouter } from 'react-router'
 import PokemonListPage from '@components/pages/PokemonListPage/PokemonListPage'
 import { usePokemonFetch } from '@hooks'
 import { usePokemonStore } from '@hooks/usePokemonStore/usePokemonStore'
@@ -16,9 +16,9 @@ const renderComponent = () => {
   const queryClient = new QueryClient()
   return render(
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <HashRouter>
         <PokemonListPage />
-      </BrowserRouter>
+      </HashRouter>
     </QueryClientProvider>
   )
 }
